@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLOW UP - Твоя makeup эра</title>
+    
+    <!-- Подключаем Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Иконки -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Настройки Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Gputeks', 'sans-serif'], // Основной шрифт
+                        heading: ['Robtronika', 'sans-serif'], // Шрифт заголовков
+                    },
+                    colors: {
+                        'glow-pink': '#EE8585', // Твой основной розово-коралловый
+                        'glow-peach': '#E8D8D0', // Твой кремовый/светлый
+                        'glow-purple': '#EBB0AA', // Промежуточный для плавного градиента (смесь первых двух)
+                        'glow-dark': '#2E2A2D', // Глубокий темный фон
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Кастомные стили и анимации -->
+    <style>
+        /* Подключаем твои локальные шрифты */
+        @font-face {
+            font-family: 'Robtronika';
+            src: url('Robtronika.ttf') format('truetype'); /* Замени .ttf на .otf или .woff если нужно */
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Gputeks';
+            src: url('Gputeks.ttf') format('truetype'); /* Замени .ttf на .otf или .woff если нужно */
+            font-display: swap;
+        }
+
+        body {
+            background-color: #2E2A2D;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Анимированный градиент на фоне (пока нет картинки) */
+        .bg-animated {
+            background: linear-gradient(-45deg, #EE8585, #EBB0AA, #E8D8D0, #EE8585);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Эффект матового стекла */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px -10px rgba(238, 133, 133, 0.5); /* Цвет EE8585 с прозрачностью */
+            border-color: rgba(238, 133, 133, 0.3);
+        }
+
+        /* Анимации появления (Reveal) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Плавный скролл для всей страницы */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Скрываем стандартный скроллбар для эстетики */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #2E2A2D; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(238, 133, 133, 0.5); /* Цвет EE8585 */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #EE8585; 
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-glow-pink selection:text-white">
+
+    <!-- Фоновый градиент (Сюда потом можно вставить <img> или background-image для фотки) -->
+    <div class="bg-animated" id="parallax-bg"></div>
+    
+    <!-- Затемнение фона для лучшей читаемости текста -->
+    <div class="fixed inset-0 bg-black/30 z-[-1]"></div>
+
+    <!-- Навигация (Шапка) -->
+    <nav class="fixed w-full z-50 glass transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Лого -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="font-heading font-black text-2xl tracking-tighter text-white uppercase drop-shadow-md">
+                        Glow<span class="text-glow-pink">Up</span>
+                    </a>
+                </div>
+                
+                <!-- Десктопное меню -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#about" class="text-gray-200 hover:text-white hover:text-glow-pink transition-colors px-3 py-2 rounded-md text-sm font-medium">О кемпе</a>
+                        <a href="#program" class="text-gray-200 hover:text-white hover:text-glow-pink transition-colors px-3 py-2 rounded-md text-sm font-medium">Программа</a>
+                        <a href="#join" class="glass px-6 py-2 rounded-full text-sm font-bold hover:bg-white hover:text-glow-pink transition-all shadow-[0_0_15px_rgba(230,184,195,0.3)]">Влететь на буткемп</a>
+                    </div>
+                </div>
+                
+                <!-- Мобильный бургер -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-white hover:bg-white/10 focus:outline-none">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Мобильное меню (скрыто по умолчанию) -->
+        <div class="md:hidden hidden glass absolute w-full left-0 top-20 border-t border-white/10" id="mobile-menu">
+            <div class="px-2 pt-2 pb-6 space-y-1 sm:px-3 flex flex-col items-center">
+                <a href="#about" class="text-gray-200 hover:text-white block px-3 py-3 rounded-md text-base font-medium">О кемпе</a>
+                <a href="#program" class="text-gray-200 hover:text-white block px-3 py-3 rounded-md text-base font-medium">Программа</a>
+                <a href="#join" class="mt-4 bg-gradient-to-r from-glow-pink to-glow-purple text-white px-8 py-3 rounded-full text-base font-bold shadow-lg w-11/12 text-center">Занять место</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Первый экран (Hero) -->
+    <main class="relative pt-32 pb-16 sm:pt-40 sm:pb-24 lg:pb-32 min-h-screen flex items-center justify-center overflow-hidden">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            
+            <!-- Плашки с инфой -->
+            <div class="flex flex-wrap justify-center gap-3 mb-8 reveal delay-100">
+                <span class="glass px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider">🗓️ Август 2026</span>
+                <span class="glass px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider">📍 Офлайн • Самуи</span>
+                <span class="glass px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-glow-pink shadow-[0_0_10px_rgba(230,184,195,0.2)]">🔥 Осталось 5 мест</span>
+            </div>
+
+            <!-- Главный заголовок -->
+            <h1 class="font-heading text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight mb-6 reveal delay-200 parallax-el" data-speed="0.05">
+                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-300">Твой идеальный</span>
+                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-glow-pink via-glow-peach to-glow-purple mt-2 drop-shadow-lg">мейк начинается здесь.</span>
+            </h1>
+            
+            <!-- Подзаголовок -->
+            <p class="mx-auto mt-6 max-w-2xl text-lg sm:text-xl text-gray-200 reveal delay-300 font-medium">
+                GLOW UP - твоя makeup эpa. Забудь про "штукатурку" и скатывающийся тон. Научим делать эстетичный, дорогой и стойкий мейк на каждый день.
+            </p>
+            
+            <!-- Кнопки -->
+            <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4 reveal delay-400">
+                <a href="#program" class="glass-card px-8 py-4 rounded-full text-lg font-bold text-white hover:bg-white/10 transition-all flex items-center justify-center gap-2 group">
+                    Смотреть программу
+                    <i data-lucide="arrow-down" class="w-5 h-5 group-hover:translate-y-1 transition-transform"></i>
+                </a>
+                <a href="#join" class="bg-gradient-to-r from-glow-pink to-glow-purple px-8 py-4 rounded-full text-lg font-bold text-white shadow-[0_0_20px_rgba(230,184,195,0.5)] hover:shadow-[0_0_30px_rgba(230,184,195,0.8)] hover:scale-105 transition-all flex items-center justify-center">
+                    Влететь на буткемп
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Секция программы (берем инфу из дока) -->
+    <section id="program" class="py-24 relative z-10 bg-[#2E2A2D]/80 backdrop-blur-xl border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-glow-pink font-semibold tracking-wide uppercase text-sm mb-2">Что будет на буткемпе?</h2>
+                <p class="font-heading mt-2 text-4xl leading-8 font-extrabold tracking-tight text-white sm:text-5xl">
+                    Программа <span class="text-transparent bg-clip-text bg-gradient-to-r from-glow-pink to-glow-purple">Glow Up</span>
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Карточка 1: Уход -->
+                <div class="glass-card rounded-3xl p-8 reveal">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-glow-pink to-glow-purple flex items-center justify-center mb-6 shadow-lg shadow-glow-pink/30">
+                        <i data-lucide="sparkles" class="text-white w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-heading text-2xl font-bold mb-3">Skincare Check</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                        Твой Prep-ритуал перед мейком. Почему макияж не «ложится» и как это исправить за 10 минут.
+                    </p>
+                    <ul class="text-sm text-gray-400 space-y-2">
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-glow-pink mt-0.5 shrink-0"></i> <b>Foundation of the Foundation:</b> Учимся готовить кожу (даже дорогой тон выглядит плохо на грязной коже).</li>
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-glow-pink mt-0.5 shrink-0"></i> <b>Skincare as Primer:</b> Крем вместо базы под макияж.</li>
+                    </ul>
+                </div>
+
+                <!-- Карточка 2: Кисти и Инструменты -->
+                <div class="glass-card rounded-3xl p-8 reveal delay-100">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-glow-purple to-glow-pink flex items-center justify-center mb-6 shadow-lg shadow-glow-purple/30">
+                        <i data-lucide="brush" class="text-white w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-heading text-2xl font-bold mb-3">Инструменты</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                        Разбираем косметичку и кисти. Что реально нужно, а что маркетинг?
+                    </p>
+                    <ul class="text-sm text-gray-400 space-y-2">
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-glow-purple mt-0.5 shrink-0"></i> <b>Натуральный vs Синтетика:</b> Для сухих (пудра) и кремовых (тон, консилер) текстур.</li>
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-glow-purple mt-0.5 shrink-0"></i> <b>Must-have кисти:</b> Для пудры, консилера, бровей и тушевки теней.</li>
+                    </ul>
+                </div>
+
+                <!-- Карточка 3: Очищение -->
+                <div class="glass-card rounded-3xl p-8 reveal delay-200">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-glow-peach to-glow-pink flex items-center justify-center mb-6 shadow-lg shadow-glow-peach/30">
+                        <i data-lucide="droplets" class="text-white w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-heading text-2xl font-bold mb-3">Очищение</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                        Очищение и уход: ЭТО БАЗА! Как смывать косметику так, чтобы не было прыщей.
+                    </p>
+                    <ul class="text-sm text-gray-400 space-y-2">
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-glow-peach mt-0.5 shrink-0"></i> <b>Double cleansing:</b> Двухэтапное очищение лица (снимаем SPF и стойкий мейк).</li>
+                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-glow-peach mt-0.5 shrink-0"></i> <b>Масла и бальзамы:</b> Растворяем водостойкий макияж без вреда для кожи.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция записи и прайс -->
+    <section id="join" class="py-24 relative z-10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card rounded-[2.5rem] p-10 md:p-16 text-center relative overflow-hidden reveal">
+                <!-- Декоративные блики -->
+                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-glow-pink/10 to-glow-purple/10 z-0"></div>
+                <div class="absolute -top-24 -right-24 w-48 h-48 bg-glow-pink/30 rounded-full blur-3xl z-0"></div>
+                <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-glow-purple/30 rounded-full blur-3xl z-0"></div>
+                
+                <div class="relative z-10">
+                    <h2 class="font-heading text-4xl md:text-5xl font-black mb-6">Готова к трансформации?</h2>
+                    <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                        Места разлетаются быстро. Бронируй свое место на самом эстетичном буткемпе этого лета.
+                    </p>
+                    
+                    <div class="inline-block glass rounded-2xl p-6 mb-8 border border-glow-pink/30">
+                        <p class="text-sm text-gray-400 uppercase tracking-wide mb-1">Стоимость участия</p>
+                        <p class="text-5xl font-heading font-black text-white">4,500 <span class="text-2xl text-glow-pink">THB</span></p>
+                    </div>
+
+                    <form class="max-w-md mx-auto space-y-4">
+                        <input type="text" placeholder="Твое имя" class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-glow-pink focus:ring-1 focus:ring-glow-pink transition-all">
+                        <input type="text" placeholder="Твой Telegram или Instagram" class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-glow-pink focus:ring-1 focus:ring-glow-pink transition-all">
+                        <button type="button" class="w-full bg-gradient-to-r from-glow-pink to-glow-purple text-white font-bold text-lg py-4 rounded-xl shadow-[0_0_20px_rgba(230,184,195,0.4)] hover:shadow-[0_0_30px_rgba(230,184,195,0.7)] hover:-translate-y-1 transition-all">
+                            Хочу на кемп!
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer class="border-t border-white/10 py-8 relative z-10 bg-[#2E2A2D]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between">
+            <div class="font-heading font-black text-xl tracking-tighter text-white uppercase opacity-80 mb-4 md:mb-0">
+                Glow<span class="text-glow-pink">Up</span>
+            </div>
+            <p class="text-gray-500 text-sm text-center md:text-left">
+                © 2026 Koh Samui. All rights reserved. Создано для твоей эстетики.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Скрипты -->
+    <script>
+        // Инициализация иконок Lucide
+        lucide.createIcons();
+
+        // 1. Мобильное меню (Бургер)
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            // Анимация иконки меню
+            const icon = btn.querySelector('i');
+            if (menu.classList.contains('hidden')) {
+                icon.setAttribute('data-lucide', 'menu');
+            } else {
+                icon.setAttribute('data-lucide', 'x');
+            }
+            lucide.createIcons();
+        });
+
+        // Закрываем мобильное меню при клике на ссылку
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+                btn.querySelector('i').setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
+            });
+        });
+
+        // 2. Блюр шапки при скролле
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg', 'bg-[#2E2A2D]/50');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                navbar.classList.remove('shadow-lg', 'bg-[#2E2A2D]/50');
+                navbar.classList.add('bg-transparent');
+            }
+        });
+
+        // 3. Анимация появления элементов (Intersection Observer)
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => {
+            revealOnScroll.observe(el);
+        });
+
+        // 4. Легкий параллакс эффект для заголовка при движении мыши (десктоп)
+        document.addEventListener('mousemove', (e) => {
+            if (window.innerWidth > 768) {
+                const elements = document.querySelectorAll('.parallax-el');
+                const x = (window.innerWidth - e.pageX * 2) / 100;
+                const y = (window.innerHeight - e.pageY * 2) / 100;
+
+                elements.forEach(el => {
+                    const speed = el.getAttribute('data-speed');
+                    el.style.transform = `translateX(${x * speed}px) translateY(${y * speed}px)`;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
