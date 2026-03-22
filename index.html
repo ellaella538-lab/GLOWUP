@@ -789,9 +789,20 @@
             fill.style.width = `${progress}%`;
         }, 200);
 
-        // Предзагрузка тяжелой фоновой фотки
+// Предзагрузка тяжелой фоновой фотки
         const bgImg = new Image();
-        bgImg.src = 'https://i.ibb.co/whHLfBNv/glowup.jpg';
+        const primaryUrl = 'https://i.postimg.cc/264zKVCx/glowup.jpg';
+        const fallbackUrl = 'https://i.ibb.co/whHLfBNv/glowup.jpg'; // <-- ВСТАВЬ СВОЮ ССЫЛКУ СЮДА
+
+        bgImg.src = primaryUrl;
+
+        // Перехватчик ошибок (Если imgbb заблокирован в РФ)
+        bgImg.onerror = () => {
+            console.log('Основной фон недоступен, загружаем резервный...');
+            bgImg.src = fallbackUrl;
+            // Принудительно меняем картинку в CSS для элемента
+            document.getElementById('parallax-bg').style.backgroundImage = `url('${fallbackUrl}')`;
+        };
 
         const finishLoading = () => {
             clearInterval(progressInterval);
