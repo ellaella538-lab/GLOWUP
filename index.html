@@ -54,6 +54,10 @@
             transform-origin: top center;
         }
 
+        /* ЛОГИКА ДВУЯЗЫЧНОСТИ */
+        body:not(.lang-en) .lang-en-text { display: none !important; }
+        body.lang-en .lang-ru-text { display: none !important; }
+
         /* Эстетичный прелоадер (дыхание) */
         @keyframes softPulse {
             0%, 100% { transform: scale(1); }
@@ -242,12 +246,13 @@
     <!-- ЛЮКСОВЫЙ PRELOADER -->
     <div id="preloader" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#E8D8D0] transition-opacity duration-700 ease-in-out">
         <div class="relative font-heading font-black text-5xl md:text-7xl tracking-widest uppercase animate-soft-pulse">
-            <!-- Бледный текст на фоне -->
             <div class="text-glow-red/20 select-none">GLOWUP</div>
-            <!-- Заполняющийся яркий текст -->
             <div id="preloader-fill" class="absolute top-0 left-0 text-glow-red overflow-hidden whitespace-nowrap transition-all duration-300 ease-out select-none" style="width: 0%;">GLOWUP</div>
         </div>
-        <p class="mt-6 font-sans text-[10px] md:text-xs tracking-[0.3em] uppercase text-glow-red/60 font-bold animate-pulse select-none">Loading your aesthetic...</p>
+        <p class="mt-6 font-sans text-[10px] md:text-xs tracking-[0.3em] uppercase text-glow-red/60 font-bold animate-pulse select-none">
+            <span class="lang-ru-text">Загрузка эстетики...</span>
+            <span class="lang-en-text">Loading your aesthetic...</span>
+        </p>
     </div>
 
     <!-- Фоны -->
@@ -281,12 +286,33 @@
                 </div>
                 
                 <!-- Десктопное меню -->
-                <div class="hidden md:block">
+                <div class="hidden md:flex items-center">
                     <div class="ml-10 flex items-center space-x-6 lg:space-x-8">
-                        <a href="#about" class="font-sans text-glow-red hover:text-glow-yellow transition-colors text-xs lg:text-sm tracking-wider uppercase font-bold">О кемпе</a>
-                        <a href="#about-me" class="font-sans text-glow-red hover:text-glow-yellow transition-colors text-xs lg:text-sm tracking-wider uppercase font-bold">Обо мне</a>
-                        <a href="#program" class="font-sans text-glow-red hover:text-glow-yellow transition-colors text-xs lg:text-sm tracking-wider uppercase font-bold">Программа</a>
-                        <a href="#join" class="bg-glow-yellow text-glow-red hover:bg-white px-8 py-3.5 rounded-full text-xs lg:text-sm font-bold tracking-wider uppercase transition-all shadow-md font-sans">Занять место</a>
+                        <a href="#about" class="font-sans text-glow-red hover:text-glow-yellow transition-colors text-xs lg:text-sm tracking-wider uppercase font-bold">
+                            <span class="lang-ru-text">О кемпе</span>
+                            <span class="lang-en-text">About Camp</span>
+                        </a>
+                        <a href="#about-me" class="font-sans text-glow-red hover:text-glow-yellow transition-colors text-xs lg:text-sm tracking-wider uppercase font-bold">
+                            <span class="lang-ru-text">Обо мне</span>
+                            <span class="lang-en-text">About Me</span>
+                        </a>
+                        <a href="#program" class="font-sans text-glow-red hover:text-glow-yellow transition-colors text-xs lg:text-sm tracking-wider uppercase font-bold">
+                            <span class="lang-ru-text">Программа</span>
+                            <span class="lang-en-text">Program</span>
+                        </a>
+                        <a href="#join" class="bg-glow-yellow text-glow-red hover:bg-white px-8 py-3.5 rounded-full text-xs lg:text-sm font-bold tracking-wider uppercase transition-all shadow-md font-sans">
+                            <span class="lang-ru-text">Занять место</span>
+                            <span class="lang-en-text">Book a spot</span>
+                        </a>
+                    </div>
+                    
+                    <div class="hidden sm:block w-px h-8 bg-white/30 mx-6"></div>
+
+                    <!-- Переключатель языка -->
+                    <div class="lang-toggle-btn flex items-center gap-2 border border-glow-red/30 rounded-full px-3 py-1.5 glass-light cursor-pointer hover:bg-white/10 transition-colors shadow-sm">
+                        <span class="lang-btn-ru ... text-glow-red ...">RU</span>
+                        <span class="... text-glow-red/40 ...">|</span>
+                        <span class="lang-btn-en ... text-glow-red/40 ...">EN</span>
                     </div>
                 </div>
                 
@@ -303,11 +329,31 @@
         <div id="mobile-menu-backdrop" class="md:hidden hidden fixed inset-0 z-[45] bg-[#E8D8D0]/80 backdrop-blur-md transition-opacity fade-in-tab"></div>
         
         <div class="md:hidden hidden fixed inset-x-4 mx-auto top-[90px] max-w-sm glass-solid rounded-[2rem] border border-white/50 shadow-2xl z-[50] p-6 fade-in-tab" id="mobile-menu">
-            <div class="flex flex-col items-center space-y-6 w-full">
-                <a href="#about" class="font-heading text-xl text-glow-red hover:text-glow-yellow uppercase font-bold tracking-wider">О кемпе</a>
-                <a href="#about-me" class="font-heading text-xl text-glow-red hover:text-glow-yellow uppercase font-bold tracking-wider">Обо мне</a>
-                <a href="#program" class="font-heading text-xl text-glow-red hover:text-glow-yellow uppercase font-bold tracking-wider">Программа</a>
-                <a href="#join" class="mt-2 bg-glow-yellow text-glow-red px-6 py-4 rounded-full text-sm font-heading font-bold tracking-wider uppercase shadow-lg w-full text-center block">Влететь на кемп</a>
+            <div class="flex flex-col items-center space-y-6 w-full relative pt-4">
+                
+                <!-- Язык в мобилке -->
+                <div class="lang-toggle-btn absolute top-0 right-2 flex items-center gap-2 border border-glow-red/30 rounded-full px-3 py-1 bg-white/10 cursor-pointer shadow-sm">
+                    <span class="lang-btn-ru ... text-glow-red ...">RU</span>
+                    <span class="... text-glow-red/40 ...">|</span>
+                    <span class="lang-btn-en ... text-glow-red/40 ...">EN</span>
+                </div>
+
+                <a href="#about" class="font-heading text-xl text-glow-red hover:text-glow-yellow uppercase font-bold tracking-wider mt-4">
+                    <span class="lang-ru-text">О кемпе</span>
+                    <span class="lang-en-text">About Camp</span>
+                </a>
+                <a href="#about-me" class="font-heading text-xl text-glow-red hover:text-glow-yellow uppercase font-bold tracking-wider">
+                    <span class="lang-ru-text">Обо мне</span>
+                    <span class="lang-en-text">About Me</span>
+                </a>
+                <a href="#program" class="font-heading text-xl text-glow-red hover:text-glow-yellow uppercase font-bold tracking-wider">
+                    <span class="lang-ru-text">Программа</span>
+                    <span class="lang-en-text">Program</span>
+                </a>
+                <a href="#join" class="mt-2 bg-glow-yellow text-glow-red px-6 py-4 rounded-full text-sm font-heading font-bold tracking-wider uppercase shadow-lg w-full text-center block">
+                    <span class="lang-ru-text">Влететь на кемп</span>
+                    <span class="lang-en-text">Snag a spot</span>
+                </a>
             </div>
         </div>
     </nav>
@@ -322,19 +368,30 @@
                 GLOWUP
             </h1>
             <p class="font-heading font-medium text-lg sm:text-xl lg:text-2xl text-white tracking-widest uppercase opacity-90 -mt-0 sm:-mt-1">
-                твоя makeup эра
+                <span class="lang-ru-text">твоя makeup эра</span>
+                <span class="lang-en-text">your makeup era</span>
             </p>
 
             <div id="delayed-container" class="mt-12 flex flex-col items-center w-full px-4 overflow-hidden">
                 <div class="flex flex-wrap justify-center gap-3 mb-8 w-full">
-                    <span class="fly-in fly-in-left glass px-5 py-2.5 rounded-full text-xs sm:text-sm font-sans text-glow-red tracking-wider uppercase border border-glow-red shadow-md font-bold">Май 2026</span>
-                    <span class="fly-in fly-in-bottom glass px-5 py-2.5 rounded-full text-xs sm:text-sm font-sans text-glow-red tracking-wider uppercase border border-glow-red shadow-md font-bold">Самуи • Офлайн</span>
-                    <span class="fly-in fly-in-right border border-glow-yellow text-glow-yellow bg-glow-yellow/10 px-5 py-2.5 rounded-full text-xs sm:text-sm font-sans tracking-wider uppercase shadow-[0_0_15px_rgba(255,232,152,0.3)] backdrop-blur-md font-bold">Осталось 5 мест</span>
+                    <span class="fly-in fly-in-left glass px-5 py-2.5 rounded-full text-xs sm:text-sm font-sans text-glow-red tracking-wider uppercase border border-glow-red shadow-md font-bold">
+                        <span class="lang-ru-text">Май 2026</span>
+                        <span class="lang-en-text">May 2026</span>
+                    </span>
+                    <span class="fly-in fly-in-bottom glass px-5 py-2.5 rounded-full text-xs sm:text-sm font-sans text-glow-red tracking-wider uppercase border border-glow-red shadow-md font-bold">
+                        <span class="lang-ru-text">Самуи • Офлайн</span>
+                        <span class="lang-en-text">Samui • Offline</span>
+                    </span>
+                    <span class="fly-in fly-in-right border border-glow-yellow text-glow-yellow bg-glow-yellow/10 px-5 py-2.5 rounded-full text-xs sm:text-sm font-sans tracking-wider uppercase shadow-[0_0_15px_rgba(255,232,152,0.3)] backdrop-blur-md font-bold">
+                        <span class="lang-ru-text">Осталось 5 мест</span>
+                        <span class="lang-en-text">Only 5 spots left</span>
+                    </span>
                 </div>
 
                 <div class="fly-in fly-in-bottom glass-light p-6 md:p-8 rounded-3xl max-w-2xl mx-auto shadow-sm">
                     <p class="text-lg md:text-2xl text-glow-red font-sans leading-relaxed tracking-wide font-medium">
-                        Секрет того самого образа из Pinterest: учимся делать стойкий и эстетичный мейк
+                        <span class="lang-ru-text">Секрет того самого образа из Pinterest: учимся делать стойкий и эстетичный мейк</span>
+                        <span class="lang-en-text">The secret to that Pinterest look: learning to create a flawless, long-lasting aesthetic beat</span>
                     </p>
                 </div>
             </div>
@@ -342,7 +399,8 @@
 
         <div class="flex-1 flex flex-col justify-end pb-8 z-10 w-full text-center">
             <p class="font-sans text-xs sm:text-sm text-white tracking-widest uppercase font-bold text-shadow-hard opacity-90">
-                лекция + практика 240 минут
+                <span class="lang-ru-text">лекция + практика 240 минут</span>
+                <span class="lang-en-text">lecture + practice 240 mins</span>
             </p>
             <div class="mt-4 animate-bounce opacity-60">
                 <i data-lucide="chevron-down" class="w-6 h-6 mx-auto text-white"></i>
@@ -355,9 +413,12 @@
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div class="text-center mb-10 reveal">
-                <h2 class="font-sans text-glow-red/80 tracking-widest uppercase text-xs mb-4 font-bold">Узнай, что внутри</h2>
+                <h2 class="font-sans text-glow-red/80 tracking-widest uppercase text-xs mb-4 font-bold">
+                    <span class="lang-ru-text">Узнай, что внутри</span>
+                    <span class="lang-en-text">Sneak peek inside</span>
+                </h2>
                 <p class="font-heading font-black text-5xl sm:text-6xl md:text-7xl tracking-wide text-glow-red drop-shadow-xl uppercase">
-                    Программа <span class="text-glow-yellow drop-shadow-md">GLOW UP</span>
+                    <span class="lang-ru-text">Программа</span><span class="lang-en-text">Program</span> <span class="text-glow-yellow drop-shadow-md">GLOW UP</span>
                 </p>
             </div>
 
@@ -365,15 +426,17 @@
             <div class="flex justify-center mb-12 reveal relative z-10 w-full px-2">
                 <div class="glass p-1.5 rounded-[2rem] sm:rounded-full inline-flex flex-col sm:flex-row gap-2 shadow-sm max-w-full">
                     <button id="tab-theory" class="tab-btn bg-glow-red text-glow-yellow px-6 sm:px-8 py-3.5 rounded-full font-heading font-bold uppercase tracking-wider text-sm sm:text-base shadow-[0_4px_15px_rgba(175,79,91,0.4)] transition-all whitespace-nowrap overflow-hidden text-ellipsis">
-                        Программа лекций
+                        <span class="lang-ru-text">Программа лекций</span>
+                        <span class="lang-en-text">Theory & Lectures</span>
                     </button>
                     <button id="tab-practice" class="tab-btn text-glow-red hover:bg-white/20 px-6 sm:px-8 py-3.5 rounded-full font-heading font-bold uppercase tracking-wider text-sm sm:text-base transition-all whitespace-nowrap overflow-hidden text-ellipsis">
-                        Программа практики
+                        <span class="lang-ru-text">Программа практики</span>
+                        <span class="lang-en-text">Practice & Hands-on</span>
                     </button>
                 </div>
             </div>
 
-            <!-- БЛОК ЛЕКЦИЙ (ТЕОРИЯ) -->
+            <!-- БЛОК ЛЕКЦИЙ (ТЕОРИЯ) - ОБНОВЛЕННАЯ 7 БЛОКОВ -->
             <div id="block-theory" class="glass-solid rounded-[2rem] p-6 md:p-10 border border-white/50 mb-10 reveal shadow-md">
                 
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-6 mb-8">
@@ -381,16 +444,23 @@
                         <div class="w-12 h-12 rounded-full border border-glow-red bg-white/20 flex items-center justify-center flex-shrink-0">
                             <i data-lucide="book-open" class="text-glow-red w-5 h-5"></i>
                         </div>
-                        <h3 class="font-heading font-bold text-3xl md:text-4xl text-glow-red uppercase tracking-wider text-left">Теория & Лекции</h3>
+                        <h3 class="font-heading font-bold text-3xl md:text-4xl text-glow-red uppercase tracking-wider text-left">
+                            <span class="lang-ru-text">Теория & Лекции</span>
+                            <span class="lang-en-text">Theory & Lectures</span>
+                        </h3>
                     </div>
 
                     <div class="flex items-center gap-4 border border-glow-red/30 bg-white/30 rounded-full px-4 py-2">
                         <button class="btn-expand-all font-sans text-[10px] md:text-xs font-bold text-glow-red hover:text-glow-yellow uppercase tracking-wider transition-colors flex items-center gap-1">
-                            <i data-lucide="chevrons-down" class="w-4 h-4"></i> Развернуть все
+                            <i data-lucide="chevrons-down" class="w-4 h-4"></i> 
+                            <span class="lang-ru-text">Развернуть все</span>
+                            <span class="lang-en-text">Expand all</span>
                         </button>
                         <div class="w-px h-4 bg-glow-red/30"></div>
                         <button class="btn-collapse-all font-sans text-[10px] md:text-xs font-bold text-glow-red hover:text-glow-yellow uppercase tracking-wider transition-colors flex items-center gap-1">
-                            <i data-lucide="chevrons-up" class="w-4 h-4"></i> Свернуть все
+                            <i data-lucide="chevrons-up" class="w-4 h-4"></i> 
+                            <span class="lang-ru-text">Свернуть все</span>
+                            <span class="lang-en-text">Collapse all</span>
                         </button>
                     </div>
                 </div>
@@ -400,15 +470,26 @@
                     <div class="border-b border-glow-red/20 last:border-0">
                         <button class="accordion-header w-full flex justify-between items-center py-5 text-left group">
                             <h4 class="font-heading font-semibold text-xl md:text-2xl text-glow-red group-hover:text-glow-yellow transition-colors tracking-wide pr-4">
-                                1. Skincare Check: Твой Prep-ритуал перед мейком
+                                <span class="lang-ru-text">1. Skincare Check & Skin ID: Твой Prep-ритуал перед мейком</span>
+                                <span class="lang-en-text">1. Skincare Check & Skin ID: Your pre-makeup prep ritual</span>
                             </h4>
                             <i data-lucide="plus" class="accordion-icon text-glow-red w-6 h-6 flex-shrink-0"></i>
                         </button>
                         <div class="accordion-content">
                             <div class="accordion-inner font-sans text-sm md:text-base text-glow-red/90 font-medium">
-                                <ul class="space-y-3 list-disc ml-6 pb-2 pb-2">
-                                    <li>The Foundation of the Foundation — почему даже самый дорогой тон выглядит плохо на коже. Учимся определять свой тип кожи и согласно этому ее подготавливать</li>
-                                    <li>Skincare as Primer — как использовать увлажняющий крем, чтобы он работал как лучший праймер в твоей жизни</li>
+                                <ul class="space-y-3 list-disc ml-6 pb-2">
+                                    <li>
+                                        <span class="lang-ru-text">The Foundation of the Foundation — почему даже самый дорогой тон выглядит плохо на коже. Учимся определять свой тип кожи и согласно этому ее подготавливать</span>
+                                        <span class="lang-en-text">The Foundation of the Foundation — why even the most expensive foundation looks bad on skin. Learning to ID your skin type and prep accordingly</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Skincare as Primer — как использовать увлажняющий крем, чтобы он работал как лучший праймер в твоей жизни</span>
+                                        <span class="lang-en-text">Skincare as Primer — how to make your moisturizer work as the ultimate primer</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Glow или Matte — виды тональных средств и их финиши - подбираем под свой тип кожи</span>
+                                        <span class="lang-en-text">Glow or Matte — foundation types and finishes - picking the right one for your skin</span>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -418,16 +499,30 @@
                     <div class="border-b border-glow-red/20 last:border-0">
                         <button class="accordion-header w-full flex justify-between items-center py-5 text-left group">
                             <h4 class="font-heading font-semibold text-xl md:text-2xl text-glow-red group-hover:text-glow-yellow transition-colors tracking-wide pr-4">
-                                2. Консилеры & Корректоры: Стираем несовершенства
+                                <span class="lang-ru-text">2. Консилеры & Корректоры: Стираем несовершенства</span>
+                                <span class="lang-en-text">2. Concealers & Correctors: Erasing imperfections</span>
                             </h4>
                             <i data-lucide="plus" class="accordion-icon text-glow-red w-6 h-6 flex-shrink-0"></i>
                         </button>
                         <div class="accordion-content">
                             <div class="accordion-inner font-sans text-sm md:text-base text-glow-red/90 font-medium">
-                                <ul class="space-y-3 list-disc ml-6 pb-2 pb-2">
-                                    <li>Цветокоррекция (Логика цвета) — для чего нужен зеленый / персиковый / лавандовый корректор</li>
-                                    <li>Консилер (Текстура) — какую лучше выбрать текстуру: матовую или сияющую?</li>
-                                    <li>Лайфхаки при нанесении</li>
+                                <ul class="space-y-3 list-disc ml-6 pb-2">
+                                    <li>
+                                        <span class="lang-ru-text">Цветокоррекция (Логика цвета) — для чего нужен зеленый / персиковый / лавандовый корректор</span>
+                                        <span class="lang-en-text">Color Correction (Color Logic) — what green / peach / lavender correctors are actually for</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Консилер (Текстура) — какую лучше выбрать текстуру: матовую или сияющую?</span>
+                                        <span class="lang-en-text">Concealer (Texture) — matte or radiant? Picking your perfect finish</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Консилеры — плотность и текстура решает</span>
+                                        <span class="lang-en-text">Concealers — coverage and texture are everything</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Лайфхаки при нанесении</span>
+                                        <span class="lang-en-text">Application cheat codes</span>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -437,17 +532,30 @@
                     <div class="border-b border-glow-red/20 last:border-0">
                         <button class="accordion-header w-full flex justify-between items-center py-5 text-left group">
                             <h4 class="font-heading font-semibold text-xl md:text-2xl text-glow-red group-hover:text-glow-yellow transition-colors tracking-wide pr-4">
-                                3. Face Geometry: Пропорции и Акценты
+                                <span class="lang-ru-text">3. Sponge vs Brush: Главная битва за идеальный тон</span>
+                                <span class="lang-en-text">3. Sponge vs Brush: The ultimate battle for a flawless base</span>
                             </h4>
                             <i data-lucide="plus" class="accordion-icon text-glow-red w-6 h-6 flex-shrink-0"></i>
                         </button>
                         <div class="accordion-content">
                             <div class="accordion-inner font-sans text-sm md:text-base text-glow-red/90 font-medium">
-                                <p class="mb-2">Логика акцентов:</p>
-                                <ul class="space-y-3 list-disc ml-6 pb-2 pb-2">
-                                    <li>Зона объема (Блик)</li>
-                                    <li>Зона затемнения</li>
-                                    <li>Линейный Ритм (ЛР) — твой главный чит-код</li>
+                                <ul class="space-y-3 list-disc ml-6 pb-2">
+                                    <li>
+                                        <span class="lang-ru-text">Ворс: Натуральный vs Синтетика</span>
+                                        <span class="lang-en-text">Bristles: Natural vs Synthetic</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Твой Starter Pack (Базовый набор)</span>
+                                        <span class="lang-en-text">Your Starter Pack (The essentials)</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Главный лайфхак по чистой растушевке</span>
+                                        <span class="lang-en-text">The main hack for a clean blend</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Гигиена (То, на что нельзя забивать!)</span>
+                                        <span class="lang-en-text">Hygiene (The non-negotiables!)</span>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -457,17 +565,38 @@
                     <div class="border-b border-glow-red/20 last:border-0">
                         <button class="accordion-header w-full flex justify-between items-center py-5 text-left group">
                             <h4 class="font-heading font-semibold text-xl md:text-2xl text-glow-red group-hover:text-glow-yellow transition-colors tracking-wide pr-4">
-                                4. Глаза и брови: Твой идеальный взгляд
+                                <span class="lang-ru-text">4. Глаза и брови: Твой идеальный взгляд</span>
+                                <span class="lang-en-text">4. Eyes & Brows: Your perfect gaze</span>
                             </h4>
                             <i data-lucide="plus" class="accordion-icon text-glow-red w-6 h-6 flex-shrink-0"></i>
                         </button>
                         <div class="accordion-content">
                             <div class="accordion-inner font-sans text-sm md:text-base text-glow-red/90 font-medium">
                                 <ul class="space-y-3 list-disc ml-6 pb-2">
-                                    <li>Пропорции глаз и рабочая зона глаза</li>
-                                    <li>Применение в макияже по анатомическим особенностям глаза</li>
-                                    <li>Нанесение текстур и их стойкость</li>
-                                    <li>Направляющая и точка при построении тушевки</li>
+                                    <li>
+                                        <span class="lang-ru-text">Пропорции глаз и рабочая зона глаза</span>
+                                        <span class="lang-en-text">Eye proportions and working zones</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Применение в макияже по анатомическим особенностям глаза</span>
+                                        <span class="lang-en-text">Adapting makeup to your eye anatomy</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Нанесение текстур и их стойкость</span>
+                                        <span class="lang-en-text">Texture application and longevity</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Направляющая и точка при построении тушевки</span>
+                                        <span class="lang-en-text">Guidelines and anchor points for blending</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Контур глаз — Стрелки, межресничка и лисий взгляд</span>
+                                        <span class="lang-en-text">Eye contour — eyeliner, tightlining, and the fox eye</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Brows Era — Архитектура и лифтинг</span>
+                                        <span class="lang-en-text">Brows Era — Architecture and lifting</span>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -477,26 +606,105 @@
                     <div class="border-b border-glow-red/20 last:border-0">
                         <button class="accordion-header w-full flex justify-between items-center py-5 text-left group">
                             <h4 class="font-heading font-semibold text-xl md:text-2xl text-glow-red group-hover:text-glow-yellow transition-colors tracking-wide pr-4">
-                                5. Мир Beauty & Makeup
+                                <span class="lang-ru-text">5. Face Geometry & Foundation Lab: Нанесение, Пропорции и Акценты</span>
+                                <span class="lang-en-text">5. Face Geometry & Foundation Lab: Application, Proportions, and Accents</span>
                             </h4>
                             <i data-lucide="plus" class="accordion-icon text-glow-red w-6 h-6 flex-shrink-0"></i>
                         </button>
                         <div class="accordion-content">
                             <div class="accordion-inner font-sans text-sm md:text-base text-glow-red/90 font-medium">
                                 <ul class="space-y-3 list-disc ml-6 pb-2">
-                                    <li>Виды тональных средств и их финиши — подбираем под свой тип кожи</li>
-                                    <li>Консилеры — плотность и текстура решает</li>
-                                    <li>Скульптор vs Бронзер — Тень или Загар? Различие скульптора от бронзера и их применение</li>
-                                    <li>Blush Era — Свежесть и сияние. Выбираем под свой вайб и тип кожи</li>
-                                    <li>Highlighter Era — Искусство сияния как из космоса</li>
-                                    <li>Powder Power — Фиксация и Матирование</li>
-                                    <li>Глаза — База, тени и секреты стойкости</li>
-                                    <li>Контур глаз — Стрелки, межресничка и лисий взгляд</li>
-                                    <li>Mascara Magic — Идеальные ресницы</li>
+                                    <li>
+                                        <span class="lang-ru-text">Тональный крем — твой идеальный фильтр в реале</span>
+                                        <span class="lang-en-text">Foundation — your perfect IRL filter</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Логика акцентов: Зона объема и Зона затемнения</span>
+                                        <span class="lang-en-text">Accent logic: Volume zones and Shading zones</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Линейный Ритм — твой главный чит-код</span>
+                                        <span class="lang-en-text">Linear Rhythm — your main cheat code</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Скульптор vs Бронзер — Тень или Загар? Различие скульптора от бронзера и их применение</span>
+                                        <span class="lang-en-text">Contour vs Bronzer — Shadow or Tan? The difference and how to use them</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Blush Era — Свежесть и сияние. Выбираем под свой вайб и тип кожи</span>
+                                        <span class="lang-en-text">Blush Era — Freshness and glow. Matching your vibe and skin type</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Highlighter Era — Искусство сияния как из космоса</span>
+                                        <span class="lang-en-text">Highlighter Era — The art of a blinding space-level glow</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Powder Power — Фиксация и Матирование</span>
+                                        <span class="lang-en-text">Powder Power — Setting and Mattifying</span>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Теория 6 -->
+                    <div class="border-b border-glow-red/20 last:border-0">
+                        <button class="accordion-header w-full flex justify-between items-center py-5 text-left group">
+                            <h4 class="font-heading font-semibold text-xl md:text-2xl text-glow-red group-hover:text-glow-yellow transition-colors tracking-wide pr-4">
+                                <span class="lang-ru-text">6. Мир Beauty & Makeup</span>
+                                <span class="lang-en-text">6. The Beauty & Makeup World</span>
+                            </h4>
+                            <i data-lucide="plus" class="accordion-icon text-glow-red w-6 h-6 flex-shrink-0"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-inner font-sans text-sm md:text-base text-glow-red/90 font-medium">
+                                <ul class="space-y-3 list-disc ml-6 pb-2">
+                                    <li>
+                                        <span class="lang-ru-text">Глаза — База, тени, секреты стойкости и правило выбора палетки</span>
+                                        <span class="lang-en-text">Eyes — Base, eyeshadows, longevity secrets, and choosing your palette</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Mascara Magic — ресницы и фиксация</span>
+                                        <span class="lang-en-text">Mascara Magic — lashes and hold</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Lip Combo — Тинты, Масла и Идеальный Контур</span>
+                                        <span class="lang-en-text">Lip Combo — Tints, oils, and the perfect contour</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Beauty Helpers — Твои секретные инструменты</span>
+                                        <span class="lang-en-text">Beauty Helpers — Your secret weapons</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Теория 7 -->
+                    <div class="border-b border-glow-red/20 last:border-0">
+                        <button class="accordion-header w-full flex justify-between items-center py-5 text-left group">
+                            <h4 class="font-heading font-semibold text-xl md:text-2xl text-glow-red group-hover:text-glow-yellow transition-colors tracking-wide pr-4">
+                                <span class="lang-ru-text">7. Очищение и Уход: ЭТО БАЗА!</span>
+                                <span class="lang-en-text">7. Cleansing & Skincare: IT'S GIVING BASE!</span>
+                            </h4>
+                            <i data-lucide="plus" class="accordion-icon text-glow-red w-6 h-6 flex-shrink-0"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-inner font-sans text-sm md:text-base text-glow-red/90 font-medium">
+                                <ul class="space-y-3 list-disc ml-6 pb-2">
+                                    <li>
+                                        <span class="lang-ru-text">Double cleansing - это двухэтапное очищение лица от макияжа и санскрина</span>
+                                        <span class="lang-en-text">Double cleansing - the two-step routine to melt away makeup and SPF</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Базовый уход без восьмиступенчатого тренда</span>
+                                        <span class="lang-en-text">A solid baseline routine without the 8-step hype</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -508,16 +716,23 @@
                         <div class="w-12 h-12 rounded-full border border-glow-red bg-white/20 flex items-center justify-center flex-shrink-0">
                             <i data-lucide="paintbrush" class="text-glow-red w-5 h-5"></i>
                         </div>
-                        <h3 class="font-heading font-bold text-3xl md:text-4xl text-glow-red uppercase tracking-wider text-left">Практика & Отработка</h3>
+                        <h3 class="font-heading font-bold text-3xl md:text-4xl text-glow-red uppercase tracking-wider text-left">
+                            <span class="lang-ru-text">Практика & Отработка</span>
+                            <span class="lang-en-text">Practice & Hands-on</span>
+                        </h3>
                     </div>
 
                     <div class="flex items-center gap-4 border border-glow-red/30 bg-white/30 rounded-full px-4 py-2">
                         <button class="btn-expand-all font-sans text-[10px] md:text-xs font-bold text-glow-red hover:text-glow-yellow uppercase tracking-wider transition-colors flex items-center gap-1">
-                            <i data-lucide="chevrons-down" class="w-4 h-4"></i> Развернуть все
+                            <i data-lucide="chevrons-down" class="w-4 h-4"></i> 
+                            <span class="lang-ru-text">Развернуть все</span>
+                            <span class="lang-en-text">Expand all</span>
                         </button>
                         <div class="w-px h-4 bg-glow-red/30"></div>
                         <button class="btn-collapse-all font-sans text-[10px] md:text-xs font-bold text-glow-red hover:text-glow-yellow uppercase tracking-wider transition-colors flex items-center gap-1">
-                            <i data-lucide="chevrons-up" class="w-4 h-4"></i> Свернуть все
+                            <i data-lucide="chevrons-up" class="w-4 h-4"></i> 
+                            <span class="lang-ru-text">Свернуть все</span>
+                            <span class="lang-en-text">Collapse all</span>
                         </button>
                     </div>
                 </div>
@@ -527,16 +742,26 @@
                     <div class="border-b border-glow-red/20 last:border-0">
                         <button class="accordion-header w-full flex justify-between items-center py-5 text-left group">
                             <h4 class="font-heading font-semibold text-xl md:text-2xl text-glow-red group-hover:text-glow-yellow transition-colors tracking-wide pr-4">
-                                Этап 1: Skin Prep & Base
+                                <span class="lang-ru-text">Этап 1: Skin Prep & Base</span>
+                                <span class="lang-en-text">Stage 1: Skin Prep & Base</span>
                             </h4>
                             <i data-lucide="plus" class="accordion-icon text-glow-red w-6 h-6 flex-shrink-0"></i>
                         </button>
                         <div class="accordion-content">
                             <div class="accordion-inner font-sans text-sm md:text-base text-glow-red/90 font-medium">
                                 <ul class="space-y-3 list-disc ml-6 pb-2">
-                                    <li>Диагностика: Каждая определяет свой тип кожи (жирная/сухая/комби)</li>
-                                    <li>Уход и подготовка кожи: Наносим легкий увлажняющий крем и обязательно SPF (база для Самуи!)</li>
-                                    <li>Читерство с цветом: Учимся работать с палитрой корректоров и консилером. Маскируем так, чтобы «стереть» несовершенства</li>
+                                    <li>
+                                        <span class="lang-ru-text">Диагностика: Каждая определяет свой тип кожи (жирная/сухая/комби)</span>
+                                        <span class="lang-en-text">Diagnosis: Everyone IDs their skin type (oily/dry/combo)</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Уход и подготовка кожи: Наносим легкий увлажняющий крем и обязательно SPF (база для Самуи!)</span>
+                                        <span class="lang-en-text">Prep & care: Applying a light moisturizer and mandatory SPF (Koh Samui essentials!)</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Читерство с цветом: Учимся работать с палитрой корректоров и консилером. Маскируем так, чтобы «стереть» несовершенства</span>
+                                        <span class="lang-en-text">Color cheating: Working with corrector palettes and concealers. Masking to "erase" imperfections</span>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -546,17 +771,30 @@
                     <div class="border-b border-glow-red/20 last:border-0">
                         <button class="accordion-header w-full flex justify-between items-center py-5 text-left group">
                             <h4 class="font-heading font-semibold text-xl md:text-2xl text-glow-red group-hover:text-glow-yellow transition-colors tracking-wide pr-4">
-                                Этап 2: Глаза
+                                <span class="lang-ru-text">Этап 2: Глаза</span>
+                                <span class="lang-en-text">Stage 2: Eyes</span>
                             </h4>
                             <i data-lucide="plus" class="accordion-icon text-glow-red w-6 h-6 flex-shrink-0"></i>
                         </button>
                         <div class="accordion-content">
                             <div class="accordion-inner font-sans text-sm md:text-base text-glow-red/90 font-medium">
                                 <ul class="space-y-3 list-disc ml-6 pb-2">
-                                    <li>Межресничка: Учимся прокрашивать карандашом пространство между ресниц (взгляд сразу станет «deep»)</li>
-                                    <li>Shadow Game: Делаем правильный «basic» макияж глаз, который можно трансформировать в вечерний или цветной</li>
-                                    <li>Brow Style: Учимся работать с бровями и их фиксировать</li>
-                                    <li>Тушь: Даже этот этап зависит от того, как будет выглядеть твой образ</li>
+                                    <li>
+                                        <span class="lang-ru-text">Межресничка: Учимся прокрашивать карандашом пространство между ресниц (взгляд сразу станет «deep»)</span>
+                                        <span class="lang-en-text">Tightlining: Learning to line the waterline for a "deep" look</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Shadow Game: Делаем правильный «basic» макияж глаз, который можно трансформировать в вечерний или цветной</span>
+                                        <span class="lang-en-text">Shadow Game: Creating a proper "basic" eye look that can be transformed into evening or color glam</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Brow Style: Учимся работать с бровями и их фиксировать</span>
+                                        <span class="lang-en-text">Brow Style: Working with brows and setting them</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Тушь: Даже этот этап зависит от того, как будет выглядеть твой образ</span>
+                                        <span class="lang-en-text">Mascara: Adapting this step to your final look</span>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -566,18 +804,34 @@
                     <div class="border-b border-glow-red/20 last:border-0">
                         <button class="accordion-header w-full flex justify-between items-center py-5 text-left group">
                             <h4 class="font-heading font-semibold text-xl md:text-2xl text-glow-red group-hover:text-glow-yellow transition-colors tracking-wide pr-4">
-                                Этап 3: Лицо Snatched
+                                <span class="lang-ru-text">Этап 3: Лицо Snatched</span>
+                                <span class="lang-en-text">Stage 3: Snatched Face</span>
                             </h4>
                             <i data-lucide="plus" class="accordion-icon text-glow-red w-6 h-6 flex-shrink-0"></i>
                         </button>
                         <div class="accordion-content">
                             <div class="accordion-inner font-sans text-sm md:text-base text-glow-red/90 font-medium">
                                 <ul class="space-y-3 list-disc ml-6 pb-2">
-                                    <li>Тон: Учимся наносить тон влажным спонжем или кистью, чтобы кожа сияла, а не выглядела как маска</li>
-                                    <li>Архитектура: Найдем твою скуловую кость и сделаем те самые впалые скулы</li>
-                                    <li>Sun-kissed look: Добавим правильно бронзер и покажем всем, что ты бронзовая богиня</li>
-                                    <li>Свежесть: Нанесем румяна и сделаем из тебя ту самую pinterest girl</li>
-                                    <li>Baking Lite: Слегка зафиксируем Т-зону пудрой, чтобы мейк не уплыл через 5 минут</li>
+                                    <li>
+                                        <span class="lang-ru-text">Тон: Учимся наносить тон влажным спонжем или кистью, чтобы кожа сияла, а не выглядела как маска</span>
+                                        <span class="lang-en-text">Base: Applying foundation with a damp sponge or brush for glowing, non-cakey skin</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Архитектура: Найдем твою скуловую кость и сделаем те самые впалые скулы</span>
+                                        <span class="lang-en-text">Architecture: Finding your cheekbones and sculpting that hollowed look</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Sun-kissed look: Добавим правильно бронзер и покажем всем, что ты бронзовая богиня</span>
+                                        <span class="lang-en-text">Sun-kissed look: Adding bronzer properly to unleash your inner bronze goddess</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Свежесть: Нанесем румяна и сделаем из тебя ту самую pinterest girl</span>
+                                        <span class="lang-en-text">Freshness: Applying blush to make you that Pinterest girl</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Baking Lite: Слегка зафиксируем Т-зону пудрой, чтобы мейк не уплыл через 5 минут</span>
+                                        <span class="lang-en-text">Baking Lite: Gently setting the T-zone so the beat doesn't melt in 5 mins</span>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -587,16 +841,26 @@
                     <div class="border-b border-glow-red/20 last:border-0">
                         <button class="accordion-header w-full flex justify-between items-center py-5 text-left group">
                             <h4 class="font-heading font-semibold text-xl md:text-2xl text-glow-red group-hover:text-glow-yellow transition-colors tracking-wide pr-4">
-                                Этап 4: Lip Combo & Final Touch
+                                <span class="lang-ru-text">Этап 4: Lip Combo & Final Touch</span>
+                                <span class="lang-en-text">Stage 4: Lip Combo & Final Touch</span>
                             </h4>
                             <i data-lucide="plus" class="accordion-icon text-glow-red w-6 h-6 flex-shrink-0"></i>
                         </button>
                         <div class="accordion-content">
                             <div class="accordion-inner font-sans text-sm md:text-base text-glow-red/90 font-medium">
                                 <ul class="space-y-3 list-disc ml-6 pb-2">
-                                    <li>Контур: Учимся правильно выходить за контур</li>
-                                    <li>Тинт: Делаем тот самый корейский эффект</li>
-                                    <li>Glow: Добавляем сияние или матируем губы</li>
+                                    <li>
+                                        <span class="lang-ru-text">Контур: Учимся правильно выходить за контур</span>
+                                        <span class="lang-en-text">Contour: How to properly overline</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Тинт: Делаем тот самый корейский эффект</span>
+                                        <span class="lang-en-text">Tint: Getting that Korean bitten-lip effect</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Glow: Добавляем сияние или матируем губы</span>
+                                        <span class="lang-en-text">Glow: Adding shine or going matte</span>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -606,18 +870,34 @@
                     <div class="border-b border-glow-red/20 last:border-0">
                         <button class="accordion-header w-full flex justify-between items-center py-5 text-left group">
                             <h4 class="font-heading font-semibold text-xl md:text-2xl text-glow-red group-hover:text-glow-yellow transition-colors tracking-wide pr-4">
-                                Трансформация в вечерний образ (Glow to Night)
+                                <span class="lang-ru-text">Трансформация в вечерний образ (Glow to Night)</span>
+                                <span class="lang-en-text">Stage 5: Glow to Night Transformation</span>
                             </h4>
                             <i data-lucide="plus" class="accordion-icon text-glow-red w-6 h-6 flex-shrink-0"></i>
                         </button>
                         <div class="accordion-content">
                             <div class="accordion-inner font-sans text-sm md:text-base text-glow-red/90 font-medium">
                                 <ul class="space-y-3 list-disc ml-6 pb-2">
-                                    <li>Мы не смываем дневной мейк, а наслаиваем вечерние или цветные акценты сверху</li>
-                                    <li>Подготовка и База Refresh: освежаем макияж и корректируем недочеты</li>
-                                    <li>Фиксация: подготавливаем кожу к добавлению текстуры</li>
-                                    <li>Глаза: Добавляем Драму или Цвета</li>
-                                    <li>Тени: Научимся использовать темные или яркие оттенки</li>
+                                    <li>
+                                        <span class="lang-ru-text">Мы не смываем дневной мейк, а наслаиваем вечерние или цветные акценты сверху</span>
+                                        <span class="lang-en-text">We don't wash off the day look, we build evening/color accents on top</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Подготовка и База Refresh: освежаем макияж и корректируем недочеты</span>
+                                        <span class="lang-en-text">Prep & Base Refresh: reviving the makeup and fixing flaws</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Фиксация: подготавливаем кожу к добавлению текстуры</span>
+                                        <span class="lang-en-text">Setting: prepping skin to hold extra textures</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Глаза: Добавляем Драму или Цвета</span>
+                                        <span class="lang-en-text">Eyes: Adding Drama or Colors</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-ru-text">Тени: Научимся использовать темные или яркие оттенки</span>
+                                        <span class="lang-en-text">Eyeshadows: Learning to use dark or bold shades</span>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -635,25 +915,27 @@
             <div class="glass-solid rounded-[2rem] p-10 md:p-20 text-center relative overflow-hidden reveal border border-white/50 shadow-xl">
                 <div class="relative z-10 flex flex-col items-center">
                     
-                    <h2 class="font-heading font-bold text-2xl px-5 md:text-6xl tracking-wide mb-6 text-glow-red uppercase">Готова к трансформации?</h2>
+                    <h2 class="font-heading font-bold text-2xl px-5 md:text-6xl tracking-wide mb-6 text-glow-red uppercase">
+                        <span class="lang-ru-text">Готова к трансформации?</span>
+                        <span class="lang-en-text">Ready to transform?</span>
+                    </h2>
                     
                     <p class="font-sans text-sm md:text-base text-glow-red/90 mb-10 max-w-xl mx-auto leading-relaxed glass p-6 rounded-2xl border border-white/30 font-medium">
-                        Места разлетаются быстро. Бронируй свое место на самом эстетичном буткемпе 
+                        <span class="lang-ru-text">Места разлетаются быстро. Бронируй свое место на самом эстетичном буткемпе</span>
+                        <span class="lang-en-text">Spots are flying. Book yours at the most aesthetic bootcamp</span>
                         <span class="inline-block bg-glow-red text-glow-yellow px-3 py-1 rounded-lg shadow-[0_4px_15px_rgba(255,232,152,0.4)] border border-glow-yellow/50 font-heading font-bold text-xl uppercase mx-1 transform -translate-y-0.5">GLOW UP</span> 
-                        этого лета.
+                        <span class="lang-ru-text">этого лета.</span>
+                        <span class="lang-en-text">this summer.</span>
                     </p>
                     
-                    <div class="inline-block bg-white/40 rounded-[1.5rem] px-8 py-5 mb-10 border border-white/60 shadow-md">
-                        <p class="font-sans text-xs text-glow-red/80 uppercase tracking-widest mb-2 font-bold">Стоимость участия</p>
-                        <p class="font-heading font-black text-3xl md:text-4xl lg:text-5xl text-glow-red tracking-wider uppercase mt-2">Прайс не определен</p>
-                    </div>
-
+                    
                     <!-- ИНТЕГРИРОВАННАЯ ФОРМА TELEGRAM -->
                     <form id="registration-form" class="w-full max-w-md mx-auto space-y-4 font-sans">
                         <input type="text" id="user-name" required placeholder="ТВОЕ ИМЯ" class="w-full bg-white/50 border border-glow-red/30 rounded-xl px-6 py-4 text-sm tracking-widest text-glow-red placeholder-glow-red/60 focus:outline-none focus:border-glow-red focus:ring-1 focus:ring-glow-red transition-all font-bold">
                         <input type="text" id="user-contact" required placeholder="TELEGRAM / INSTAGRAM" class="w-full bg-white/50 border border-glow-red/30 rounded-xl px-6 py-4 text-sm tracking-widest text-glow-red placeholder-glow-red/60 focus:outline-none focus:border-glow-red focus:ring-1 focus:ring-glow-red transition-all font-bold">
                         <button type="submit" id="submit-btn" class="w-full bg-glow-yellow text-glow-red tracking-widest font-bold text-base py-5 rounded-xl hover:bg-white hover:scale-[1.02] transition-all uppercase mt-6 shadow-[0_10px_30px_rgba(255,232,152,0.4)] border border-white/50">
-                            Занять место
+                            <span class="lang-ru-text">Занять место</span>
+                            <span class="lang-en-text">Secure my spot</span>
                         </button>
                     </form>
                 </div>
@@ -668,7 +950,8 @@
                 GLOW<span class="text-glow-yellow drop-shadow-sm ml-1">UP</span>
             </div>
             <p class="font-sans text-glow-red/70 text-[10px] tracking-widest uppercase text-center font-bold leading-relaxed">
-                © 2026 KOH SAMUI. ALL RIGHTS RESERVED.<br>СОЗДАНО ДЛЯ ТВОЕЙ ЭСТЕТИКИ.
+                <span class="lang-ru-text">© 2026 KOH SAMUI. ALL RIGHTS RESERVED.<br>СОЗДАНО ДЛЯ ТВОЕЙ ЭСТЕТИКИ.</span>
+                <span class="lang-en-text">© 2026 KOH SAMUI. ALL RIGHTS RESERVED.<br>CURATED FOR YOUR AESTHETIC.</span>
             </p>
         </div>
     </footer>
@@ -687,13 +970,17 @@
                 <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-glow-yellow/20 rounded-full blur-[50px] z-[-1]"></div>
 
                 <h2 class="font-heading font-bold text-3xl md:text-5xl text-glow-red mb-6 tracking-wide uppercase">
-                    Snatched-кожа в реальной жизни
+                    <span class="lang-ru-text">Snatched-кожа в реальной жизни</span>
+                    <span class="lang-en-text">Snatched skin in real life</span>
                 </h2>
                 <div class="w-16 h-1 bg-glow-red/30 mx-auto mb-8 rounded-full"></div>
                 
                 <p class="font-sans text-sm md:text-base text-glow-red/90 leading-relaxed font-medium text-left sm:text-center space-y-4">
-                    <span class="block mb-4">Хватит использовать фильтры — научись делать кожу «Snatched» в реальной жизни!</span>
-                    <span class="block">Залетай на воркшоп, где мы разберем косметику по фактам. Никаких плохих советов — только рабочие чит-коды, как выглядеть на все 100% в школе, на тусовке или в сторис.</span>
+                    <span class="block mb-4 lang-ru-text">Хватит использовать фильтры — научись делать кожу «Snatched» в реальной жизни!</span>
+                    <span class="block mb-4 lang-en-text">Drop the filters — learn to get that "Snatched" skin IRL!</span>
+                    
+                    <span class="block lang-ru-text">Залетай на воркшоп, где мы разберем косметику по фактам. Никаких плохих советов — только рабочие чит-коды, как выглядеть на все 100% в школе, на тусовке или в сторис.</span>
+                    <span class="block lang-en-text">Join the workshop where we'll decode makeup with straight facts. No bad advice — only real cheat codes on how to look 100% at school, at a party, or on your stories.</span>
                 </p>
             </div>
         </div>
@@ -711,48 +998,67 @@
             <div class="relative z-10 font-sans max-h-[85vh] overflow-y-auto p-6 md:p-12 pt-16 md:pt-16">
                 <!-- Заголовок -->
                 <div class="text-center mb-8 mt-2">
-                    <h2 class="font-heading font-bold text-3xl md:text-4xl text-glow-red uppercase tracking-wide">Твой Beauty-наставник</h2>
-                    <h3 class="font-heading font-black text-4xl md:text-5xl text-glow-yellow drop-shadow-md mt-2">ЭЛЕОНОРА</h3>
+                    <h2 class="font-heading font-bold text-3xl md:text-4xl text-glow-red uppercase tracking-wide">
+                        <span class="lang-ru-text">Твой Beauty-наставник</span>
+                        <span class="lang-en-text">Your Beauty Mentor</span>
+                    </h2>
+                    <h3 class="font-heading font-black text-4xl md:text-5xl text-glow-yellow drop-shadow-md mt-2">
+                        <span class="lang-ru-text">ЭЛЕОНОРА</span>
+                        <span class="lang-en-text">ELEONORA</span>
+                    </h3>
                     <div class="w-16 h-1 bg-glow-red/30 mx-auto mt-6 rounded-full"></div>
                 </div>
                 
                 <p class="text-sm md:text-base text-glow-red/90 leading-relaxed font-medium mb-8 text-center px-4">
-                    Привет! Я Элеонора, профессиональный визажист и твой проводник в мир осознанного макияжа здесь, на Самуи. Я не просто «крашу лица» — я создаю образы, которые попадают в журналы, и учу девчонок управлять своей внешностью без фильтров.
+                    <span class="lang-ru-text">Привет! Я Элеонора, профессиональный визажист и твой проводник в мир осознанного макияжа здесь, на Самуи. Я не просто «крашу лица» — я создаю образы, которые попадают в журналы, и учу девчонок управлять своей внешностью без фильтров.</span>
+                    <span class="lang-en-text">Hey! I'm Eleonora, a pro MUA and your guide to mindful makeup here in Koh Samui. I don't just "paint faces" — I create magazine-worthy looks and teach girls how to master their appearance without filters.</span>
                 </p>
 
                 <!-- Почему мне можно доверять? -->
-                <h4 class="font-heading font-bold text-2xl text-glow-red uppercase mb-4 pl-2">Почему мне можно доверять?</h4>
+                <h4 class="font-heading font-bold text-2xl text-glow-red uppercase mb-4 pl-2">
+                    <span class="lang-ru-text">Почему мне можно доверять?</span>
+                    <span class="lang-en-text">Why trust me?</span>
+                </h4>
                 <ul class="space-y-4 text-sm md:text-base text-glow-red/90 leading-relaxed mb-8">
                     <li class="flex items-start gap-3">
                         <i data-lucide="star" class="w-5 h-5 text-glow-yellow flex-shrink-0 mt-0.5"></i>
-                        <span>Питерская школа: Базовое образование получила в ведущей школе Санкт-Петербурга — Face Time.</span>
+                        <span class="lang-ru-text">Питерская школа: Базовое образование получила в ведущей школе Санкт-Петербурга — Face Time.</span>
+                        <span class="lang-en-text">St. Petersburg School: Got my foundational education at Face Time, a top school in St. Pete.</span>
                     </li>
                     <li class="flex items-start gap-3">
                         <i data-lucide="star" class="w-5 h-5 text-glow-yellow flex-shrink-0 mt-0.5"></i>
-                        <span>Училась у лучших: Прошла прокачку у топовых мастеров индустрии — Софии Бабуриной, Пони Рома, Pinkmint, Murmyaaaau, Кристины Рей и многих других.</span>
+                        <span class="lang-ru-text">Училась у лучших: Прошла прокачку у топовых мастеров индустрии — Софии Бабуриной, Пони Рома, Pinkmint, Murmyaaaau, Кристины Рей и многие другие.</span>
+                        <span class="lang-en-text">Learned from the best: Levelled up with industry top artists — Sofia Baburina, Pony Roma, Pinkmint, Murmyaaaau, Kristina Rey, and more.</span>
                     </li>
                     <li class="flex items-start gap-3">
                         <i data-lucide="star" class="w-5 h-5 text-glow-yellow flex-shrink-0 mt-0.5"></i>
-                        <span>Glossy Vibes: Мои работы публикуются в международных онлайн и офлайн журналах.</span>
+                        <span class="lang-ru-text">Glossy Vibes: Мои работы публикуются в международных онлайн и офлайн журналах.</span>
+                        <span class="lang-en-text">Glossy Vibes: My work is published in international online and offline magazines.</span>
                     </li>
                     <li class="flex items-start gap-3">
                         <i data-lucide="star" class="w-5 h-5 text-glow-yellow flex-shrink-0 mt-0.5"></i>
-                        <span>Island Life: Уже 4 года живу на Самуи и точно знаю, как сделать мейк, который выживет в +30°C и экваториальной влажности.</span>
+                        <span class="lang-ru-text">Island Life: Уже 4 года живу на Самуи и точно знаю, как сделать мейк, который выживет в +30°C и экваториальной влажности.</span>
+                        <span class="lang-en-text">Island Life: Been living in Koh Samui for 4 years and I know exactly how to make a beat survive +30°C and equatorial humidity.</span>
                     </li>
                 </ul>
 
                 <!-- Мой подход -->
-                <h4 class="font-heading font-bold text-2xl text-glow-red uppercase mb-4 pl-2">Мой подход</h4>
+                <h4 class="font-heading font-bold text-2xl text-glow-red uppercase mb-4 pl-2">
+                    <span class="lang-ru-text">Мой подход</span>
+                    <span class="lang-en-text">My approach</span>
+                </h4>
                 <div class="glass p-5 rounded-2xl mb-8 border border-white/30">
                     <p class="text-sm md:text-base text-glow-red/90 leading-relaxed font-medium">
-                        Я за чистые составы, здоровую кожу и «умную» косметичку. Я не буду заставлять тебя покупать гору банок — я научу тебя выбирать те самые 20%, которые дадут 100% результата.
+                        <span class="lang-ru-text">Я за чистые составы, здоровую кожу и «умную» косметичку. Я не буду заставлять тебя покупать гору банок — я научу тебя выбирать те самые 20%, которые дадут 100% результата.</span>
+                        <span class="lang-en-text">I stand for clean formulas, healthy skin, and a "smart" makeup bag. I won’t force you to buy a mountain of products — I’ll teach you to pick the 20% that gives you 100% results.</span>
                     </p>
                 </div>
 
                 <!-- Цитата -->
                 <div class="text-center italic bg-glow-red/10 border-l-4 border-glow-yellow p-4 md:p-6 rounded-r-xl">
                     <p class="font-sans text-glow-red font-bold text-base md:text-lg">
-                        «Макияж — это твой способ самовыражения и гейминг в реальной жизни. Давай настроим твой персонаж на максимум!»
+                        <span class="lang-ru-text">«Макияж — это твой способ самовыражения и гейминг в реальной жизни. Давай настроим твой персонаж на максимум!»</span>
+                        <span class="lang-en-text">"Makeup is your way of self-expression and gaming in real life. Let's max out your character's stats!"</span>
                     </p>
                 </div>
 
@@ -773,6 +1079,40 @@
             }
         };
 
+        // ЛОГИКА ДВУЯЗЫЧНОСТИ
+        let currentLang = 'ru';
+
+        const setLanguage = (lang) => {
+            currentLang = lang;
+            const body = document.body;
+            
+            if (lang === 'en') {
+                body.classList.add('lang-en');
+                // Пласхолдеры для формы
+                document.getElementById('user-name').placeholder = "YOUR NAME";
+                document.getElementById('user-contact').placeholder = "TELEGRAM / INSTAGRAM";
+                
+                // Переключаем стили кнопок (Активный EN, неактивный RU)
+                document.querySelectorAll('.lang-btn-ru').forEach(b => b.classList.replace('text-glow-red', 'text-glow-red/40'));
+                document.querySelectorAll('.lang-btn-en').forEach(b => b.classList.replace('text-glow-red/40', 'text-glow-red'));
+            } else {
+                body.classList.remove('lang-en');
+                // Пласхолдеры для формы
+                document.getElementById('user-name').placeholder = "ТВОЕ ИМЯ";
+                document.getElementById('user-contact').placeholder = "TELEGRAM / INSTAGRAM";
+                
+                // Переключаем стили кнопок (Активный RU, неактивный EN)
+                document.querySelectorAll('.lang-btn-ru').forEach(b => b.classList.replace('text-glow-red/40', 'text-glow-red'));
+                document.querySelectorAll('.lang-btn-en').forEach(b => b.classList.replace('text-glow-red', 'text-glow-red/40'));
+            }
+        };
+
+        document.querySelectorAll('.lang-toggle-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                setLanguage(currentLang === 'ru' ? 'en' : 'ru');
+            });
+        });
+
         // ЛОГИКА ПРЕЛОАДЕРА
         const preloader = document.getElementById('preloader');
         const fill = document.getElementById('preloader-fill');
@@ -789,18 +1129,17 @@
             fill.style.width = `${progress}%`;
         }, 200);
 
-// Предзагрузка тяжелой фоновой фотки
+        // Предзагрузка тяжелой фоновой фотки
         const bgImg = new Image();
         const primaryUrl = 'https://i.postimg.cc/264zKVCx/glowup.jpg';
-        const fallbackUrl = 'https://i.ibb.co/whHLfBNv/glowup.jpg'; // <-- ВСТАВЬ СВОЮ ССЫЛКУ СЮДА
+        const fallbackUrl = 'https://i.ibb.co/whHLfBNv/glowup.jpg'; 
 
         bgImg.src = primaryUrl;
 
-        // Перехватчик ошибок (Если imgbb заблокирован в РФ)
+        // Перехватчик ошибок
         bgImg.onerror = () => {
             console.log('Основной фон недоступен, загружаем резервный...');
             bgImg.src = fallbackUrl;
-            // Принудительно меняем картинку в CSS для элемента
             document.getElementById('parallax-bg').style.backgroundImage = `url('${fallbackUrl}')`;
         };
 
@@ -817,8 +1156,8 @@
                     
                     // ЗАПУСКАЕМ НАШУ МАГИЮ ПОЯВЛЕНИЯ ПЕРВОГО ЭКРАНА
                     revealTimer = setTimeout(triggerReveal, 5000);
-                }, 700); // время затухания прелоадера (duration-700)
-            }, 400); // небольшая пауза, чтобы юзер кайфанул от 100%
+                }, 700); 
+            }, 400); 
         };
 
         // Проверяем: загрузилась ли фотка
@@ -826,7 +1165,6 @@
             finishLoading();
         } else {
             bgImg.onload = finishLoading;
-            // Защита от долгого интернета: если за 8 сек не скачалось, открываем сайт
             setTimeout(finishLoading, 8000);
         }
 
@@ -1043,8 +1381,13 @@
 
                 if (!name || !contact) return;
 
-                const originalText = tgSubmitBtn.innerText;
-                tgSubmitBtn.innerText = 'ОТПРАВКА...';
+                const originalText = tgSubmitBtn.innerHTML;
+                
+                // Меняем текст кнопки в зависимости от языка
+                tgSubmitBtn.innerHTML = currentLang === 'en' 
+                    ? '<span class="lang-en-text" style="display:inline !important;">SENDING...</span>' 
+                    : '<span class="lang-ru-text" style="display:inline !important;">ОТПРАВКА...</span>';
+                
                 tgSubmitBtn.disabled = true;
                 tgSubmitBtn.classList.add('opacity-70', 'cursor-not-allowed');
 
@@ -1064,13 +1407,16 @@
                     });
 
                     if (response.ok) {
-                        tgSubmitBtn.innerText = 'ЗАЯВКА УЛЕТЕЛА! 🔥';
+                        tgSubmitBtn.innerHTML = currentLang === 'en' 
+                            ? '<span class="lang-en-text" style="display:inline !important;">APPLICATION SENT! 🔥</span>' 
+                            : '<span class="lang-ru-text" style="display:inline !important;">ЗАЯВКА УЛЕТЕЛА! 🔥</span>';
+                        
                         tgSubmitBtn.classList.remove('bg-glow-yellow', 'text-glow-red');
                         tgSubmitBtn.classList.add('bg-white', 'text-green-600');
                         tgForm.reset(); 
                         
                         setTimeout(() => {
-                            tgSubmitBtn.innerText = originalText;
+                            tgSubmitBtn.innerHTML = originalText;
                             tgSubmitBtn.classList.add('bg-glow-yellow', 'text-glow-red');
                             tgSubmitBtn.classList.remove('bg-white', 'text-green-600', 'opacity-70', 'cursor-not-allowed');
                             tgSubmitBtn.disabled = false;
@@ -1080,10 +1426,12 @@
                     }
                 } catch (error) {
                     console.error('Ошибка отправки:', error);
-                    tgSubmitBtn.innerText = 'ОШИБКА 😔 ПРОБУЙ ЕЩЕ';
+                    tgSubmitBtn.innerHTML = currentLang === 'en' 
+                            ? '<span class="lang-en-text" style="display:inline !important;">ERROR 😔 TRY AGAIN</span>' 
+                            : '<span class="lang-ru-text" style="display:inline !important;">ОШИБКА 😔 ПРОБУЙ ЕЩЕ</span>';
                     
                     setTimeout(() => {
-                        tgSubmitBtn.innerText = originalText;
+                        tgSubmitBtn.innerHTML = originalText;
                         tgSubmitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
                         tgSubmitBtn.disabled = false;
                     }, 3000);
