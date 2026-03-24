@@ -107,8 +107,8 @@
             top: -10vh; 
             left: -5vw;
             width: 110vw;
-            height: 140vh; 
-            background-image: url('https://i.ibb.co/whHLfBNv/glowup.jpg');
+            height: 140vh;
+            background-image: url('https://i.postimg.cc/264zKVCx/glowup.jpg'); 
             background-size: cover;
             background-position: center top;
             mix-blend-mode: multiply;
@@ -280,7 +280,7 @@
                             by ellkomakeup_
                         </span>
                         <div class="w-6 h-6 sm:w-8 sm:h-8 rounded-full border border-glow-red bg-white/10 flex items-center justify-center group-hover:border-glow-yellow group-hover:bg-glow-yellow/20 transition-all">
-                            <i data-lucide="instagram" class="w-3 h-3 sm:w-4 sm:h-4 text-glow-red group-hover:text-glow-yellow transition-colors"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3 sm:w-4 sm:h-4 text-glow-red group-hover:text-glow-yellow transition-colors"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
                         </div>
                     </a>
                 </div>
@@ -289,6 +289,10 @@
                 <div class="hidden md:flex items-center">
                     <div class="ml-10 flex items-center space-x-6 lg:space-x-8">
                         <a href="#about" class="font-sans text-glow-red hover:text-glow-yellow transition-colors text-xs lg:text-sm tracking-wider uppercase font-bold">
+                            <span class="lang-ru-text">О курсе</span>
+                            <span class="lang-en-text">About Course</span>
+                        </a>
+                        <a href="#camp" class="font-sans text-glow-red hover:text-glow-yellow transition-colors text-xs lg:text-sm tracking-wider uppercase font-bold">
                             <span class="lang-ru-text">О кемпе</span>
                             <span class="lang-en-text">About Camp</span>
                         </a>
@@ -310,9 +314,10 @@
 
                     <!-- Переключатель языка -->
                     <div class="lang-toggle-btn flex items-center gap-2 border border-glow-red/30 rounded-full px-3 py-1.5 glass-light cursor-pointer hover:bg-white/10 transition-colors shadow-sm">
-                        <span class="lang-btn-ru ... text-glow-red ...">RU</span>
-                        <span class="... text-glow-red/40 ...">|</span>
-                        <span class="lang-btn-en ... text-glow-red/40 ...">EN</span>
+                        <!-- Активный язык - красный, неактивный - прозрачный красный -->
+                        <span class="lang-btn-ru text-[10px] lg:text-xs font-bold text-glow-red transition-colors">RU</span>
+                        <span class="text-glow-red/40 text-[10px] lg:text-xs">|</span>
+                        <span class="lang-btn-en text-[10px] lg:text-xs font-bold text-glow-red/40 transition-colors">EN</span>
                     </div>
                 </div>
                 
@@ -333,12 +338,16 @@
                 
                 <!-- Язык в мобилке -->
                 <div class="lang-toggle-btn absolute top-0 right-2 flex items-center gap-2 border border-glow-red/30 rounded-full px-3 py-1 bg-white/10 cursor-pointer shadow-sm">
-                    <span class="lang-btn-ru ... text-glow-red ...">RU</span>
-                    <span class="... text-glow-red/40 ...">|</span>
-                    <span class="lang-btn-en ... text-glow-red/40 ...">EN</span>
+                    <span class="lang-btn-ru text-[10px] font-bold text-glow-red transition-colors">RU</span>
+                    <span class="text-glow-red/40 text-[10px]">|</span>
+                    <span class="lang-btn-en text-[10px] font-bold text-glow-red/40 transition-colors">EN</span>
                 </div>
 
                 <a href="#about" class="font-heading text-xl text-glow-red hover:text-glow-yellow uppercase font-bold tracking-wider mt-4">
+                    <span class="lang-ru-text">О курсе</span>
+                    <span class="lang-en-text">About Course</span>
+                </a>
+                <a href="#camp" class="font-heading text-xl text-glow-red hover:text-glow-yellow uppercase font-bold tracking-wider">
                     <span class="lang-ru-text">О кемпе</span>
                     <span class="lang-en-text">About Camp</span>
                 </a>
@@ -375,8 +384,8 @@
             <div id="delayed-container" class="mt-12 flex flex-col items-center w-full px-4 overflow-hidden">
                 <div class="flex flex-wrap justify-center gap-3 mb-8 w-full">
                     <span class="fly-in fly-in-left glass px-5 py-2.5 rounded-full text-xs sm:text-sm font-sans text-glow-red tracking-wider uppercase border border-glow-red shadow-md font-bold">
-                        <span class="lang-ru-text">Апрель/Май 2026</span>
-                        <span class="lang-en-text">April/May 2026</span>
+                        <span class="lang-ru-text">Май 2026</span>
+                        <span class="lang-en-text">May 2026</span>
                     </span>
                     <span class="fly-in fly-in-bottom glass px-5 py-2.5 rounded-full text-xs sm:text-sm font-sans text-glow-red tracking-wider uppercase border border-glow-red shadow-md font-bold">
                         <span class="lang-ru-text">Самуи • Офлайн</span>
@@ -912,10 +921,10 @@
     <!-- Секция записи и прайс -->
     <section id="join" class="py-24 relative z-10">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="glass-solid rounded-[2rem] p-10 md:p-20 text-center relative overflow-hidden reveal border border-white/50 shadow-xl">
+            <div class="glass-solid rounded-[2rem] p-6 sm:p-10 md:p-20 text-center relative overflow-hidden reveal border border-white/50 shadow-xl">
                 <div class="relative z-10 flex flex-col items-center">
                     
-                    <h2 class="font-heading font-bold text-2xl px-5 md:text-6xl tracking-wide mb-6 text-glow-red uppercase">
+                    <h2 class="font-heading font-bold text-3xl px-4 md:text-6xl tracking-wide mb-6 text-glow-red uppercase">
                         <span class="lang-ru-text">Готова к трансформации?</span>
                         <span class="lang-en-text">Ready to transform?</span>
                     </h2>
@@ -956,7 +965,7 @@
         </div>
     </footer>
 
-    <!-- Модальное окно "О Кемпе" -->
+    <!-- Модальное окно "О Курсе" (Бывшее "О Кемпе") -->
     <div id="about-modal" class="modal fixed inset-0 z-[100] flex items-center justify-center">
         <div class="modal-backdrop absolute inset-0 bg-[#2E2A2D]/60 backdrop-blur-md"></div>
         
@@ -982,6 +991,128 @@
                     <span class="block lang-ru-text">Залетай на воркшоп, где мы разберем косметику по фактам. Никаких плохих советов — только рабочие чит-коды, как выглядеть на все 100% в школе, на тусовке или в сторис.</span>
                     <span class="block lang-en-text">Join the workshop where we'll decode makeup with straight facts. No bad advice — only real cheat codes on how to look 100% at school, at a party, or on your stories.</span>
                 </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- НОВОЕ Модальное окно "О Кемпе" (Детский лагерь) -->
+    <div id="camp-modal" class="modal fixed inset-0 z-[100] flex items-center justify-center">
+        <div class="modal-backdrop absolute inset-0 bg-[#2E2A2D]/60 backdrop-blur-md"></div>
+
+        <div class="relative glass-solid rounded-[2rem] max-w-3xl w-[90%] md:w-full mx-auto shadow-2xl modal-content border border-white/50 overflow-hidden">
+            <button class="modal-close absolute top-4 right-4 md:top-6 md:right-6 text-glow-red hover:text-glow-yellow hover:rotate-90 transition-all bg-white/30 rounded-full p-2 z-20">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+
+            <div class="relative z-10 font-sans max-h-[85vh] overflow-y-auto p-6 md:p-10 pt-16 md:pt-10">
+                
+                <!-- Картинка лагеря -->
+                <img src="https://i.postimg.cc/V6FqwYFT/info_kemp.jpg" onerror="this.onerror=null;this.src='https://i.ibb.co/Qv32B9FN/info-kemp.jpg';" class="w-full object-cover rounded-2xl mb-8 shadow-lg border border-white/30" alt="Circus Camp">
+
+                <!-- Заголовок -->
+                <div class="text-center mb-6">
+                    <h2 class="font-heading font-black text-3xl md:text-5xl text-glow-red uppercase tracking-wide">
+                        ABC AcroKids Circus Camp
+                    </h2>
+                    <h3 class="font-heading font-bold text-lg md:text-xl text-glow-yellow drop-shadow-md mt-2">
+                        <span class="lang-ru-text">💦 April Circus Adventure 💦</span>
+                        <span class="lang-en-text">💦 April Circus Adventure 💦</span>
+                    </h3>
+                    <div class="w-16 h-1 bg-glow-red/30 mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <p class="text-sm md:text-base text-glow-red/90 leading-relaxed font-medium mb-6 text-center px-2">
+                    <span class="lang-ru-text">Приглашаем детей в яркий цирковой лагерь, где движение, творчество и игра соединяются в одно волшебное приключение!</span>
+                    <span class="lang-en-text">We invite kids to a vibrant circus camp where movement, creativity, and play come together in one magical adventure!</span>
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <!-- Группы -->
+                    <div class="glass p-5 rounded-2xl border border-white/30">
+                        <h4 class="font-heading font-bold text-lg text-glow-red uppercase mb-3 flex items-center gap-2">
+                            <i data-lucide="users" class="w-5 h-5 text-glow-yellow"></i>
+                            <span class="lang-ru-text">Две возрастные группы:</span>
+                            <span class="lang-en-text">Two age groups:</span>
+                        </h4>
+                        <ul class="space-y-2 text-sm md:text-base text-glow-red/90 font-medium">
+                            <li>• Younger Kids (5–8 <span class="lang-ru-text">лет</span><span class="lang-en-text">y.o.</span>)</li>
+                            <li>• Creative Teens (9–14 <span class="lang-ru-text">лет</span><span class="lang-en-text">y.o.</span>)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Инфо (Место, Время) -->
+                    <div class="glass p-5 rounded-2xl border border-white/30">
+                        <ul class="space-y-3 text-sm md:text-base text-glow-red/90 font-medium">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-glow-yellow flex-shrink-0 mt-0.5"></i>
+                                <span>Move Time Club / El Forest</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="clock" class="w-5 h-5 text-glow-yellow flex-shrink-0 mt-0.5"></i>
+                                <span>10:00 – 15:30</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="utensils" class="w-5 h-5 text-glow-yellow flex-shrink-0 mt-0.5"></i>
+                                <span><span class="lang-ru-text">Завтрак + обед</span><span class="lang-en-text">Breakfast + lunch</span></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Что ждет детей -->
+                <h4 class="font-heading font-bold text-xl text-glow-red uppercase mb-4 pl-2 text-center md:text-left">
+                    <span class="lang-ru-text">✨ Что ждёт детей:</span>
+                    <span class="lang-en-text">✨ What awaits the kids:</span>
+                </h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm md:text-base text-glow-red/90 font-medium mb-8 bg-white/20 p-5 rounded-2xl border border-white/40">
+                    <div class="flex items-center gap-2"><span class="text-xl">🎪</span> <span class="lang-ru-text">Цирк и акробатика</span><span class="lang-en-text">Circus & acrobatics</span></div>
+                    <div class="flex items-center gap-2"><span class="text-xl">🎭</span> <span class="lang-ru-text">Театр и актёрское мастерство</span><span class="lang-en-text">Theater & acting</span></div>
+                    <div class="flex items-center gap-2"><span class="text-xl">🎨</span> <span class="lang-ru-text">Арт и крафт</span><span class="lang-en-text">Art & crafts</span></div>
+                    <div class="flex items-center gap-2"><span class="text-xl">🔬</span> <span class="lang-ru-text">Весёлые научные эксперименты</span><span class="lang-en-text">Fun science experiments</span></div>
+                    <div class="flex items-center gap-2"><span class="text-xl">💄</span> <span class="lang-ru-text">Стилист и визажист</span><span class="lang-en-text">Stylist & makeup artist</span></div>
+                    <div class="flex items-center gap-2"><span class="text-xl">🍪</span> <span class="lang-ru-text">Кулинарные мастер-классы</span><span class="lang-en-text">Culinary masterclasses</span></div>
+                    <div class="flex items-center gap-2"><span class="text-xl">💦</span> <span class="lang-ru-text">Водные игры (Сонгкран)</span><span class="lang-en-text">Water games (Songkran)</span></div>
+                    <div class="flex items-center gap-2"><span class="text-xl">🌈</span> <span class="lang-ru-text">Неоновые и сенсорные активности</span><span class="lang-en-text">Neon & sensory activities</span></div>
+                </div>
+
+                <!-- Даты и Прайс -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                    <div class="bg-white/30 p-5 rounded-2xl border border-white/50 shadow-sm">
+                        <h4 class="font-heading font-bold text-lg text-glow-red uppercase mb-3 flex items-center gap-2">
+                            <i data-lucide="calendar" class="w-5 h-5 text-glow-yellow"></i>
+                            <span class="lang-ru-text">Даты смен:</span>
+                            <span class="lang-en-text">Camp dates:</span>
+                        </h4>
+                        <ul class="space-y-2 text-sm md:text-base text-glow-red/90 font-medium">
+                            <li>• 6–10 <span class="lang-ru-text">апреля</span><span class="lang-en-text">April</span> — Circus Fashion Camp</li>
+                            <li>• 13–16 <span class="lang-ru-text">апреля</span><span class="lang-en-text">April</span> — Songkran Celebration</li>
+                            <li>• 20–24 <span class="lang-ru-text">апреля</span><span class="lang-en-text">April</span> — Circus & Art Camp</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-glow-red text-glow-yellow p-5 rounded-2xl border border-glow-yellow/30 shadow-md">
+                        <h4 class="font-heading font-bold text-lg uppercase mb-3 flex items-center gap-2">
+                            <i data-lucide="wallet" class="w-5 h-5"></i>
+                            <span class="lang-ru-text">Стоимость:</span>
+                            <span class="lang-en-text">Price:</span>
+                        </h4>
+                        <ul class="space-y-3 text-sm md:text-base font-bold">
+                            <li class="flex justify-between border-b border-glow-yellow/20 pb-1.5">
+                                <span class="lang-ru-text">До 1 апреля</span><span class="lang-en-text">Until April 1st</span>
+                                <span>6,000 THB</span>
+                            </li>
+                            <li class="flex justify-between border-b border-glow-yellow/20 pb-1.5">
+                                <span class="lang-ru-text">С 1 апреля</span><span class="lang-en-text">From April 1st</span>
+                                <span>7,000 THB</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="lang-ru-text">1 день</span><span class="lang-en-text">1 day</span>
+                                <span>1,600 THB</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -1195,7 +1326,7 @@
         btn.addEventListener('click', () => toggleMobileMenu());
         mobileMenuBackdrop.addEventListener('click', () => toggleMobileMenu(false));
 
-        document.querySelectorAll('#mobile-menu a:not([href="#about"]):not([href="#about-me"])').forEach(link => {
+        document.querySelectorAll('#mobile-menu a:not([href="#about"]):not([href="#camp"]):not([href="#about-me"])').forEach(link => {
             link.addEventListener('click', () => toggleMobileMenu(false));
         });
 
@@ -1361,6 +1492,7 @@
         };
 
         setupModal('#about', 'about-modal');
+        setupModal('#camp', 'camp-modal');
         setupModal('#about-me', 'about-me-modal');
 
         // 10. ТЕЛЕГРАМ БОТ (ОТПРАВКА ФОРМЫ)
